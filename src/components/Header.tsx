@@ -38,8 +38,12 @@ export default () => {
                 </div>
             </nav>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <h1>Modal Content</h1>
-                <p>How to play</p>
+                <p>
+                    Descubra a palavra certa em 6 tentativas. Depois de cada
+                    tentativa, as peças mostram o quão perto você está da
+                    solução.
+                </p>
+                <div className="exemple">exemple</div>
             </Modal>
         </header>
     );

@@ -128,3 +128,7 @@ Modal
     font-size: 20px;
     cursor: pointer;
 }
+
+div.exemple {
+    font-size: 0.333em;
+}
