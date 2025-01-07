@@ -1,4 +1,12 @@
+import { useState } from "react";
+import Modal from "./Modal/Modal";
+
 export default () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
     return (
         <header className="header">
             <nav className="nav">
@@ -9,7 +17,7 @@ export default () => {
                             alt=""
                         />
                     </button>
-                    <button className="btn" id="help">
+                    <button className="btn" id="help" onClick={openModal}>
                         <div>?</div>
                     </button>
                 </div>
@@ -29,6 +37,10 @@ export default () => {
                     </button>
                 </div>
             </nav>
+            <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <h1>Modal Content</h1>
+                <p>This is a simple modal built with React and TypeScript.</p>
+            </Modal>
         </header>
     );
 };
