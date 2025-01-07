@@ -39,7 +39,7 @@ export default () => {
             </nav>
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 <h1>Modal Content</h1>
-                <p>This is a simple modal built with React and TypeScript.</p>
+                <p>How to play</p>
             </Modal>
         </header>
     );
