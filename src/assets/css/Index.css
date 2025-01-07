@@ -136,10 +136,11 @@ main div {
     justify-content: center;
 }
 
-main div input {
+main div input,
+main div input.empty {
     height: 60px;
     width: 60px;
-    margin: 0 2px;
+    margin: 2px;
     font-weight: 600;
     font-family: "Mitr", sans-serif;
     color: #fafaff;
@@ -149,6 +150,10 @@ main div input {
     text-transform: uppercase;
     cursor: pointer;
     text-align: center;
+}
+
+main div input.empty {
+    background-color: #4c4347;
 }
 
 main div input:focus {
