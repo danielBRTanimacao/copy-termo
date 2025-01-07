@@ -6,8 +6,8 @@ export default () => {
     return (
         <>
             <Header />
-            {/* <Game />
-            <Keyboard /> */}
+            <Game />
+            {/* <Keyboard /> */}
         </>
     );
 };

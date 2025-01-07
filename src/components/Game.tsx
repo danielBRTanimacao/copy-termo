@@ -1,7 +1,13 @@
 export default () => {
     return (
         <main>
-            <h1>jogo</h1>
+            <div>
+                <input type="text" maxLength={1} required />
+                <input type="text" maxLength={1} required />
+                <input type="text" maxLength={1} required />
+                <input type="text" maxLength={1} required />
+                <input type="text" maxLength={1} required />
+            </div>
         </main>
     );
 };
