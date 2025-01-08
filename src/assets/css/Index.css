@@ -44,9 +44,51 @@ button {
     align-items: center;
     justify-content: center;
 }
+
+.container {
+    margin: 0 1.3em;
+}
+
 /*
     HEADER
 */
+aside.container {
+    position: relative;
+    top: -1px;
+    font-family: "Mitr", sans-serif;
+    font-weight: 400;
+    font-size: 1.5em;
+    padding: 15px;
+    background-color: #222;
+}
+
+.link-division div,
+.link-division {
+    display: flex;
+    gap: 10px;
+}
+
+.link-division {
+    justify-content: space-between;
+}
+
+.link-division a {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    line-height: 1.5em;
+    height: 4vh;
+    color: var(--lightnes-color);
+    padding: 0 1em;
+    margin: 0;
+}
+
+.link-division a:active {
+    color: #585859;
+}
+
 .header {
     display: flex;
     justify-content: center;
