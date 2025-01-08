@@ -75,8 +75,7 @@ button {
 
 .btn div,
 .btn img {
-    display: flex;
-    align-items: center;
+    box-sizing: content-box;
     justify-content: center;
     border: 2px solid var(--btn-color);
     border-radius: 20%;
@@ -138,14 +137,15 @@ main div {
 
 main div input,
 main div input.empty {
-    height: 60px;
-    width: 60px;
+    font-size: 2em;
+    height: 62px;
+    width: 62px;
     margin: 2px;
     font-weight: 600;
     font-family: "Mitr", sans-serif;
     color: #fafaff;
     background-color: transparent;
-    border: 0.4em solid #4c4347;
+    border: 0.15em solid #4c4347;
     border-radius: 10%;
     text-transform: uppercase;
     cursor: pointer;
@@ -153,9 +153,12 @@ main div input.empty {
 }
 
 main div input.empty {
-    background-color: #4c4347;
+    background-color: #615458;
+    border: 0.1em solid #615458;
 }
 
 main div input:focus {
-    border-bottom: 0.8em solid #4c4347;
+    caret-color: transparent;
+    outline: none;
+    border-bottom: 0.4em solid #4c4347;
 }
