@@ -3,7 +3,10 @@ import Modal from "./Modal/Modal";
 import TopDown from "./Modal/TopDown";
 
 export default () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isOpen, setOpen] = useState({
+        modal: false,
+        topDown: false
+    });
 
     return (
         <>
@@ -20,7 +23,9 @@ export default () => {
                         <button
                             className="btn"
                             id="help"
-                            onClick={() => setIsModalOpen(true)}
+                            onClick={() =>
+                                setOpen({ modal: true, topDown: false })
+                            }
                         >
                             <div>?</div>
                         </button>
@@ -42,7 +47,10 @@ export default () => {
                     </div>
                 </nav>
             </header>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal
+                isOpen={isOpen.modal}
+                onClose={() => setOpen({ modal: false, topDown: false })}
+            >
                 <p>
                     Descubra a palavra certa em 6 tentativas. Depois de cada
                     tentativa, as peças mostram o quão perto você está da
