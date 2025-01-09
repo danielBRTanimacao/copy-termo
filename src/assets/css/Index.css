@@ -85,7 +85,7 @@ aside.container {
     margin: 0;
 }
 
-.link-division a:active {
+.link-division a.active {
     color: #585859;
 }
 

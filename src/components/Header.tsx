@@ -5,9 +5,6 @@ import TopDown from "./Modal/TopDown";
 export default () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
-
     return (
         <>
             <TopDown />
@@ -20,7 +17,11 @@ export default () => {
                                 alt=""
                             />
                         </button>
-                        <button className="btn" id="help" onClick={openModal}>
+                        <button
+                            className="btn"
+                            id="help"
+                            onClick={() => setIsModalOpen(true)}
+                        >
                             <div>?</div>
                         </button>
                     </div>
@@ -41,7 +42,7 @@ export default () => {
                     </div>
                 </nav>
             </header>
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <p>
                     Descubra a palavra certa em 6 tentativas. Depois de cada
                     tentativa, as peças mostram o quão perto você está da
