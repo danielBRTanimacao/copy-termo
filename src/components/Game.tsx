@@ -5,7 +5,6 @@ export default () => {
         return Math.floor(Math.random() * max);
     }
 
-    const rows = Array(5).fill(null);
     const getTermo = Words[getRandomInt(Words.length)];
 
     return (
@@ -17,40 +16,14 @@ export default () => {
                 <input type="text" maxLength={1} required />
                 <input type="text" maxLength={1} required />
             </div>
-            {rows.map((_, index) => (
-                <div key={index}>
-                    <input
-                        className="empty"
-                        type="text"
-                        maxLength={1}
-                        disabled
-                    />
-                    <input
-                        className="empty"
-                        type="text"
-                        maxLength={1}
-                        disabled
-                    />
-                    <input
-                        className="empty"
-                        type="text"
-                        maxLength={1}
-                        disabled
-                    />
-                    <input
-                        className="empty"
-                        type="text"
-                        maxLength={1}
-                        disabled
-                    />
-                    <input
-                        className="empty"
-                        type="text"
-                        maxLength={1}
-                        disabled
-                    />
-                </div>
-            ))}
+
+            <div>
+                <input className="empty" type="text" maxLength={1} disabled />
+                <input className="empty" type="text" maxLength={1} disabled />
+                <input className="empty" type="text" maxLength={1} disabled />
+                <input className="empty" type="text" maxLength={1} disabled />
+                <input className="empty" type="text" maxLength={1} disabled />
+            </div>
         </main>
     );
 };
