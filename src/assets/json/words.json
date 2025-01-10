@@ -1,12 +1,12 @@
-{
-    "0": "CURSO",
-    "1": "TERMO",
-    "2": "TEXTO",
-    "3": "TESTA",
-    "4": "CONTO",
-    "5": "LIVRO",
-    "6": "DADOS",
-    "7": "CONTA",
-    "8": "NOTAS",
-    "9": "LISTA"
-}
+[
+    "CURSO",
+    "TERMO",
+    "TEXTO",
+    "TESTA",
+    "CONTO",
+    "LIVRO",
+    "DADOS",
+    "CONTA",
+    "NOTAS",
+    "LISTA"
+]

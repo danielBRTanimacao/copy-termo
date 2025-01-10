@@ -1,12 +1,12 @@
 import Words from "../assets/json/words.json";
 
 export default () => {
-    function getRandomInt(max: Number) {
+    function getRandomInt(max: number): number {
         return Math.floor(Math.random() * max);
     }
 
     const rows = Array(5).fill(null);
-    const getTermo = Words[getRandomInt(10)];
+    const getTermo = Words[getRandomInt(Words.length)];
 
     return (
         <main>
