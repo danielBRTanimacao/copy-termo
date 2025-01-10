@@ -1,6 +1,15 @@
-export default () => {
+import { FC } from "react";
+
+interface TopDownProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+const TopDown: FC<TopDownProps> = ({ isOpen }) => {
+    if (!isOpen) return null;
+
     return (
-        <aside className="container">
+        <aside className="container scale-up-ver-top">
             <div className="link-division">
                 <div>
                     <a href="/" className="active">
@@ -13,3 +22,5 @@ export default () => {
         </aside>
     );
 };
+
+export default TopDown;

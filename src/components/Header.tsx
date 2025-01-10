@@ -8,14 +8,33 @@ export default () => {
         topDown: false
     });
 
+    const handleToggle = () => {
+        setOpen((prevState) => ({
+            ...prevState,
+            topDown: !prevState.topDown
+        }));
+    };
+
     return (
         <>
-            <TopDown />
+            <TopDown
+                isOpen={isOpen.topDown}
+                onClose={() => setOpen({ modal: isOpen.modal, topDown: false })}
+            />
             <header className="header">
                 <nav className="nav">
                     <div>
-                        <button className="btn" id="accordion">
+                        <button
+                            className="btn"
+                            id="accordion"
+                            onClick={handleToggle}
+                        >
                             <img
+                                className={
+                                    isOpen.topDown === true
+                                        ? "rotate-center"
+                                        : ""
+                                }
                                 src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik00My4zODE1IDc2LjUyNDZMNjMuODg5OCA1Mi45NjQ0TDg0LjM5OCA3Ni41MjQ2IiBzdHJva2U9IiNCN0FFQjQiIHN0cm9rZS13aWR0aD0iMTIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K"
                                 alt=""
                             />
@@ -24,7 +43,10 @@ export default () => {
                             className="btn"
                             id="help"
                             onClick={() =>
-                                setOpen({ modal: true, topDown: false })
+                                setOpen({
+                                    modal: true,
+                                    topDown: isOpen.topDown
+                                })
                             }
                         >
                             <div>?</div>
@@ -49,7 +71,9 @@ export default () => {
             </header>
             <Modal
                 isOpen={isOpen.modal}
-                onClose={() => setOpen({ modal: false, topDown: false })}
+                onClose={() =>
+                    setOpen({ modal: false, topDown: isOpen.topDown })
+                }
             >
                 <p>
                     Descubra a palavra certa em 6 tentativas. Depois de cada
