@@ -8,13 +8,6 @@ export default () => {
         topDown: false
     });
 
-    const handleToggle = () => {
-        setOpen((prevState) => ({
-            ...prevState,
-            topDown: !prevState.topDown
-        }));
-    };
-
     return (
         <>
             <TopDown
@@ -27,7 +20,12 @@ export default () => {
                         <button
                             className="btn"
                             id="accordion"
-                            onClick={handleToggle}
+                            onClick={() =>
+                                setOpen((prevState) => ({
+                                    ...prevState,
+                                    topDown: !prevState.topDown
+                                }))
+                            }
                         >
                             <img
                                 className={
@@ -43,10 +41,10 @@ export default () => {
                             className="btn"
                             id="help"
                             onClick={() =>
-                                setOpen({
-                                    modal: true,
-                                    topDown: isOpen.topDown
-                                })
+                                setOpen((prevState) => ({
+                                    ...prevState,
+                                    modal: !prevState.modal
+                                }))
                             }
                         >
                             <div>?</div>

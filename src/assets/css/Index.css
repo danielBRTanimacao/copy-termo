@@ -265,3 +265,9 @@ main div input:focus {
     outline: none;
     border-bottom: 0.4em solid #4c4347;
 }
+
+@media (max-width: 991.98px) {
+    .container {
+        margin: 0;
+    }
+}
