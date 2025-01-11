@@ -11,8 +11,16 @@ export default () => {
 
     const handleCollectValues = () => {
         const values = inputRefs.current.map((input) => input?.value || "");
+        if (values.length < 5) {
+            return null;
+        }
         const termo = values.join("").toUpperCase();
-        console.log("Values:", termo);
+
+        if (getTermo === termo) {
+            console.log("Ganhou");
+        } else {
+            console.log("errou");
+        }
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -20,6 +28,8 @@ export default () => {
             handleCollectValues();
         }
     };
+
+    console.log(getTermo);
 
     return (
         <main>
