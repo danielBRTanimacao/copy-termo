@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Words from "../assets/json/words.json";
 
 export default () => {
@@ -6,13 +6,21 @@ export default () => {
         return Math.floor(Math.random() * max);
     }
 
+    const [isEmpty, setIsEmpty] = useState([
+        false,
+        true,
+        true,
+        true,
+        true,
+        true
+    ]);
     const getTermo = Words[getRandomInt(Words.length)];
     const inputRefs = useRef<HTMLInputElement[]>([]);
 
     const handleCollectValues = () => {
         const values = inputRefs.current.map((input) => input?.value || "");
         if (values.length < 5) {
-            return null;
+            console.log("digite todos os valores");
         }
         const termo = values.join("").toUpperCase();
 
@@ -20,6 +28,7 @@ export default () => {
             console.log("Ganhou");
         } else {
             console.log("errou");
+            setIsEmpty([false, false, true, true, true, true]);
         }
     };
 
@@ -33,7 +42,7 @@ export default () => {
 
     return (
         <main>
-            <div onKeyDown={handleKeyDown}>
+            {/* <div onKeyDown={handleKeyDown}>
                 {Array.from({ length: 5 }).map((_, index) => (
                     <input
                         key={index}
@@ -43,19 +52,28 @@ export default () => {
                         ref={(el) => el && (inputRefs.current[index] = el)}
                     />
                 ))}
-            </div>
+            </div> */}
 
-            <div>
-                {Array.from({ length: 5 }).map((_, index) => (
-                    <input
-                        key={`disabled-${index}`}
-                        className="empty"
-                        type="text"
-                        maxLength={1}
-                        disabled
-                    />
-                ))}
-            </div>
+            {Array.from({ length: 6 }).map((_, indexKey) => (
+                <div key={indexKey} onKeyDown={handleKeyDown}>
+                    {Array.from({ length: 5 }).map((_, index) => (
+                        <input
+                            key={`disabled-${index}`}
+                            className={isEmpty[indexKey] ? `empty` : ``}
+                            type="text"
+                            maxLength={1}
+                            required
+                            disabled={isEmpty[indexKey]}
+                            ref={
+                                isEmpty[indexKey]
+                                    ? (el) =>
+                                          el && (inputRefs.current[index] = el)
+                                    : null
+                            }
+                        />
+                    ))}
+                </div>
+            ))}
         </main>
     );
 };
