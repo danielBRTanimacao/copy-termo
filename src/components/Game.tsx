@@ -2,10 +2,9 @@ import React, { useRef, useState } from "react";
 import Words from "../assets/json/words.json";
 
 export default () => {
-    function getRandomInt(max: number): number {
-        return Math.floor(Math.random() * max);
-    }
-
+    const [getRandomTermo] = useState(
+        Words[Math.floor(Math.random() * Words.length)]
+    );
     const [isEmpty, setIsEmpty] = useState([
         false,
         true,
@@ -14,7 +13,6 @@ export default () => {
         true,
         true
     ]);
-    const getTermo = Words[getRandomInt(Words.length)];
     const inputRefs = useRef<HTMLInputElement[]>([]);
 
     const handleCollectValues = () => {
@@ -25,7 +23,7 @@ export default () => {
         const termo = values.join("").toUpperCase();
 
         console.log(termo);
-        if (getTermo === termo) {
+        if (getRandomTermo === termo) {
             console.log("Ganhou");
         } else {
             console.log("errou");
@@ -39,8 +37,6 @@ export default () => {
         }
     };
 
-    console.log(getTermo);
-
     return (
         <main>
             {Array.from({ length: 6 }).map((_, indexKey) => (
@@ -51,7 +47,9 @@ export default () => {
                             className={
                                 isEmpty[indexKey]
                                     ? `empty ${
-                                          isEmpty[0] ? "wrong" : "correct"
+                                          isEmpty[indexKey]
+                                              ? "wrong"
+                                              : "correct"
                                       }`
                                     : ``
                             }
@@ -61,9 +59,9 @@ export default () => {
                             disabled={isEmpty[indexKey]}
                             ref={
                                 isEmpty[indexKey]
-                                    ? (el) =>
+                                    ? null
+                                    : (el) =>
                                           el && (inputRefs.current[index] = el)
-                                    : null
                             }
                         />
                     ))}
