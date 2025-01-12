@@ -20,15 +20,16 @@ export default () => {
     const handleCollectValues = () => {
         const values = inputRefs.current.map((input) => input?.value || "");
         if (values.length < 5) {
-            console.log("digite todos os valores");
+            return null;
         }
         const termo = values.join("").toUpperCase();
 
+        console.log(termo);
         if (getTermo === termo) {
             console.log("Ganhou");
         } else {
             console.log("errou");
-            setIsEmpty([false, false, true, true, true, true]);
+            setIsEmpty([true, false, true, true, true, true]);
         }
     };
 
@@ -42,24 +43,18 @@ export default () => {
 
     return (
         <main>
-            {/* <div onKeyDown={handleKeyDown}>
-                {Array.from({ length: 5 }).map((_, index) => (
-                    <input
-                        key={index}
-                        type="text"
-                        maxLength={1}
-                        required
-                        ref={(el) => el && (inputRefs.current[index] = el)}
-                    />
-                ))}
-            </div> */}
-
             {Array.from({ length: 6 }).map((_, indexKey) => (
                 <div key={indexKey} onKeyDown={handleKeyDown}>
                     {Array.from({ length: 5 }).map((_, index) => (
                         <input
                             key={`disabled-${index}`}
-                            className={isEmpty[indexKey] ? `empty` : ``}
+                            className={
+                                isEmpty[indexKey]
+                                    ? `empty ${
+                                          isEmpty[0] ? "wrong" : "correct"
+                                      }`
+                                    : ``
+                            }
                             type="text"
                             maxLength={1}
                             required

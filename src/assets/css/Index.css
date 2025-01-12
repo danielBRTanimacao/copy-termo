@@ -9,6 +9,7 @@
     --bg-color: #6e5c62;
     --lightnes-color: #fafaff;
     --btn-color: #b7aeb4;
+    --wrong: #312a2c;
 }
 
 body {
@@ -264,6 +265,11 @@ main div input:focus {
     caret-color: transparent;
     outline: none;
     border-bottom: 0.4em solid #4c4347;
+}
+
+.wrong {
+    background-color: var(--wrong) !important;
+    border: 0.1em solid var(--wrong) !important;
 }
 
 @media (max-width: 991.98px) {
