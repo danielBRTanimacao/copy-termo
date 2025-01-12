@@ -37,6 +37,8 @@ export default () => {
         }
     };
 
+    console.log(getRandomTermo);
+
     return (
         <main>
             {Array.from({ length: 6 }).map((_, indexKey) => (
@@ -47,11 +49,11 @@ export default () => {
                             className={
                                 isEmpty[indexKey]
                                     ? `empty ${
-                                          isEmpty[indexKey]
-                                              ? "wrong"
-                                              : "correct"
+                                          !isEmpty[-indexKey]
+                                              ? "correct"
+                                              : "wrong"
                                       }`
-                                    : ``
+                                    : ""
                             }
                             type="text"
                             maxLength={1}
