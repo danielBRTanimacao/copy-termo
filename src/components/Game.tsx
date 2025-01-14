@@ -13,19 +13,12 @@ export default () => {
         true,
         true
     ]);
-    const [isCorrect, setIsCorrect] = useState("");
+    const [isCorrect, setIsCorrect] = useState(false);
     const inputRefs = useRef<HTMLInputElement[]>([]);
-
-    const validateCorrection = () => {
-        if (isCorrect) {
-            setIsCorrect("correct");
-        } else {
-            return setIsCorrect("wrong");
-        }
-    };
 
     const handleCollectValues = () => {
         const values = inputRefs.current.map((input) => input?.value || "");
+        console.log(values.length);
         if (values.length < 5) {
             return null;
         }
@@ -33,9 +26,8 @@ export default () => {
 
         console.log(termo);
         if (getRandomTermo === termo) {
-            console.log("Ganhou");
+            setIsCorrect(true);
         } else {
-            console.log("errou");
             setIsEmpty([true, false, true, true, true, true]);
         }
     };
@@ -46,27 +38,35 @@ export default () => {
         }
     };
 
-    console.log(getRandomTermo);
-
     return (
         <main>
-            {Array.from({ length: 6 }).map((_, indexKey) => (
-                <div key={indexKey} onKeyDown={handleKeyDown}>
-                    {Array.from({ length: 5 }).map((_, index) => (
+            {isCorrect ? (
+                <div className="win">
+                    <p>Incrivel!: {getRandomTermo}</p>
+                </div>
+            ) : (
+                <div className="win"></div>
+            )}
+            {Array.from({ length: 6 }).map((_, rowKeys) => (
+                <div key={rowKeys} onKeyDown={handleKeyDown}>
+                    {Array.from({ length: 5 }).map((_, colKeys) => (
                         <input
-                            key={`disabled-${index}`}
+                            key={`disabled-${colKeys}`}
                             className={
-                                isEmpty[indexKey] ? `empty ${isCorrect}` : ""
+                                isEmpty[rowKeys]
+                                    ? `empty ${isCorrect ? "wrong" : ""}`
+                                    : ""
                             }
                             type="text"
                             maxLength={1}
                             required
-                            disabled={isEmpty[indexKey]}
+                            disabled={isEmpty[rowKeys]}
                             ref={
-                                isEmpty[indexKey]
+                                isEmpty[rowKeys]
                                     ? null
                                     : (el) =>
-                                          el && (inputRefs.current[index] = el)
+                                          el &&
+                                          (inputRefs.current[colKeys] = el)
                             }
                         />
                     ))}

@@ -278,6 +278,19 @@ main div input:focus {
     border: 0.1em solid var(--correct) !important;
 }
 
+.win {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.win p {
+    background-color: #009afe;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: small;
+}
+
 @media (max-width: 991.98px) {
     .container {
         margin: 0;
