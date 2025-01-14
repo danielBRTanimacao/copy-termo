@@ -13,7 +13,16 @@ export default () => {
         true,
         true
     ]);
+    const [isCorrect, setIsCorrect] = useState("");
     const inputRefs = useRef<HTMLInputElement[]>([]);
+
+    const validateCorrection = () => {
+        if (isCorrect) {
+            setIsCorrect("correct");
+        } else {
+            return setIsCorrect("wrong");
+        }
+    };
 
     const handleCollectValues = () => {
         const values = inputRefs.current.map((input) => input?.value || "");
@@ -47,13 +56,7 @@ export default () => {
                         <input
                             key={`disabled-${index}`}
                             className={
-                                isEmpty[indexKey]
-                                    ? `empty ${
-                                          !isEmpty[-indexKey]
-                                              ? "correct"
-                                              : "wrong"
-                                      }`
-                                    : ""
+                                isEmpty[indexKey] ? `empty ${isCorrect}` : ""
                             }
                             type="text"
                             maxLength={1}
