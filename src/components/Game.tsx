@@ -5,6 +5,7 @@ export default () => {
     const [getRandomTermo] = useState(
         Words[Math.floor(Math.random() * Words.length)]
     );
+    const [counter, setCounter] = useState(6);
     const [isEmpty, setIsEmpty] = useState([
         false,
         true,
