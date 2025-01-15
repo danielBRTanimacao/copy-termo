@@ -5,15 +5,12 @@ export default () => {
     const [getRandomTermo] = useState(
         Words[Math.floor(Math.random() * Words.length)]
     );
-    const [counter, setCounter] = useState(6);
-    const [isEmpty, setIsEmpty] = useState([
-        false,
-        true,
-        true,
-        true,
-        true,
-        true
-    ]);
+    const [counter, setCounter] = useState(1);
+    const [arrayBoolean, setArrayBoolean] = useState(
+        Array(6)
+            .fill(true)
+            .map((_, index) => index !== 0)
+    );
     const [isCorrect, setIsCorrect] = useState(false);
     const inputRefs = useRef<HTMLInputElement[]>([]);
 
@@ -28,8 +25,21 @@ export default () => {
         console.log(termo);
         if (getRandomTermo === termo) {
             setIsCorrect(true);
+            setArrayBoolean(
+                Array(6)
+                    .fill(true)
+                    .map((_, index) => index !== -1)
+            );
         } else {
-            setIsEmpty([true, false, true, true, true, true]);
+            setCounter((prevCounter) => {
+                const newCounter = prevCounter + 1;
+                const newIsEmpty = Array(6)
+                    .fill(true)
+                    .map((value, index) => index !== newCounter - 1);
+                setArrayBoolean(newIsEmpty);
+
+                return newCounter;
+            });
         }
     };
 
@@ -43,10 +53,10 @@ export default () => {
         <main>
             {isCorrect ? (
                 <div className="win">
-                    <p>Incrivel!: {getRandomTermo}</p>
+                    <p>Incrivel!</p>
                 </div>
             ) : (
-                <div className="win"></div>
+                <div className="win">{getRandomTermo}</div>
             )}
             {Array.from({ length: 6 }).map((_, rowKeys) => (
                 <div key={rowKeys} onKeyDown={handleKeyDown}>
@@ -54,16 +64,16 @@ export default () => {
                         <input
                             key={`disabled-${colKeys}`}
                             className={
-                                isEmpty[rowKeys]
+                                arrayBoolean[rowKeys]
                                     ? `empty ${isCorrect ? "wrong" : ""}`
                                     : ""
                             }
                             type="text"
                             maxLength={1}
                             required
-                            disabled={isEmpty[rowKeys]}
+                            disabled={arrayBoolean[rowKeys]}
                             ref={
-                                isEmpty[rowKeys]
+                                arrayBoolean[rowKeys]
                                     ? null
                                     : (el) =>
                                           el &&
