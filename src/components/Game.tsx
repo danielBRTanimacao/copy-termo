@@ -5,13 +5,12 @@ export default () => {
     const [getRandomTermo] = useState(
         Words[Math.floor(Math.random() * Words.length)]
     );
-    const [objectTermo, setObjTermo] = useState([
-        {
-            clean: true,
-            corect: false,
-            digitedTermo: ""
-        }
-    ]);
+    const [counter, setCounter] = useState(1);
+    const [arrayBoolean, setArrayBoolean] = useState(
+        Array(6)
+            .fill(true)
+            .map((_, index) => index !== 0)
+    );
     const [isCorrect, setIsCorrect] = useState(false);
     const inputRefs = useRef<HTMLInputElement[]>([]);
 
@@ -23,9 +22,24 @@ export default () => {
         }
         const termo = values.join("").toUpperCase();
 
+        console.log(termo);
         if (getRandomTermo === termo) {
             setIsCorrect(true);
+            setArrayBoolean(
+                Array(6)
+                    .fill(true)
+                    .map((_, index) => index !== -1)
+            );
         } else {
+            setCounter((prevCounter) => {
+                const newCounter = prevCounter + 1;
+                const newIsEmpty = Array(6)
+                    .fill(true)
+                    .map((value, index) => index !== newCounter - 1);
+                setArrayBoolean(newIsEmpty);
+
+                return newCounter;
+            });
         }
     };
 
@@ -49,15 +63,13 @@ export default () => {
                     {Array.from({ length: 5 }).map((_, colKeys) => (
                         <input
                             key={`disabled-${colKeys}`}
-                            className={
-                                objectTermo[rowKeys].clean ? `empty` : ""
-                            }
+                            className={arrayBoolean[rowKeys] ? `empty ` : ""}
                             type="text"
                             maxLength={1}
                             required
-                            disabled={objectTermo[rowKeys].clean}
+                            disabled={arrayBoolean[rowKeys]}
                             ref={
-                                objectTermo[rowKeys]
+                                arrayBoolean[rowKeys]
                                     ? null
                                     : (el) =>
                                           el &&
