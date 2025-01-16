@@ -5,12 +5,13 @@ export default () => {
     const [getRandomTermo] = useState(
         Words[Math.floor(Math.random() * Words.length)]
     );
-    const [counter, setCounter] = useState(1);
-    const [arrayBoolean, setArrayBoolean] = useState(
-        Array(6)
-            .fill(true)
-            .map((_, index) => index !== 0)
-    );
+    const [objectTermo, setObjTermo] = useState([
+        {
+            clean: true,
+            corect: false,
+            digitedTermo: ""
+        }
+    ]);
     const [isCorrect, setIsCorrect] = useState(false);
     const inputRefs = useRef<HTMLInputElement[]>([]);
 
@@ -22,24 +23,9 @@ export default () => {
         }
         const termo = values.join("").toUpperCase();
 
-        console.log(termo);
         if (getRandomTermo === termo) {
             setIsCorrect(true);
-            setArrayBoolean(
-                Array(6)
-                    .fill(true)
-                    .map((_, index) => index !== -1)
-            );
         } else {
-            setCounter((prevCounter) => {
-                const newCounter = prevCounter + 1;
-                const newIsEmpty = Array(6)
-                    .fill(true)
-                    .map((value, index) => index !== newCounter - 1);
-                setArrayBoolean(newIsEmpty);
-
-                return newCounter;
-            });
         }
     };
 
@@ -64,16 +50,14 @@ export default () => {
                         <input
                             key={`disabled-${colKeys}`}
                             className={
-                                arrayBoolean[rowKeys]
-                                    ? `empty ${isCorrect ? "wrong" : ""}`
-                                    : ""
+                                objectTermo[rowKeys].clean ? `empty` : ""
                             }
                             type="text"
                             maxLength={1}
                             required
-                            disabled={arrayBoolean[rowKeys]}
+                            disabled={objectTermo[rowKeys].clean}
                             ref={
-                                arrayBoolean[rowKeys]
+                                objectTermo[rowKeys]
                                     ? null
                                     : (el) =>
                                           el &&
