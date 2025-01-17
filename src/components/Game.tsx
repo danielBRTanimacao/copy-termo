@@ -5,24 +5,24 @@ export default () => {
     const [getRandomTermo] = useState(
         Words[Math.floor(Math.random() * Words.length)]
     );
-
-    const [inputValuesArrays, setInputValues] = useState<string[]>(
-        Array(5).fill("")
-    );
-    const [];
+    const [valuesArray, setInputValues] = useState<string[]>(Array(5).fill(""));
     const [isCorrect, setIsCorrect] = useState(false);
+    const termoDigited = valuesArray.join("").toUpperCase();
 
     const handleChange = (
         index: number,
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
-        const newValues = [...inputValuesArrays];
+        const newValues = [...valuesArray];
         newValues[index] = event.target.value;
         setInputValues(newValues);
     };
 
     const handleCollectValues = () => {
-        console.log("enviado " + inputValuesArrays);
+        console.log("enviado " + termoDigited);
+        if (termoDigited === getRandomTermo) {
+            console.log("acertou termo " + getRandomTermo);
+        }
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -41,7 +41,7 @@ export default () => {
                 <div className="win">{getRandomTermo}</div>
             )}
             <div onKeyDown={handleKeyDown}>
-                {inputValuesArrays.map((value, index) => (
+                {valuesArray.map((value, index) => (
                     <input
                         key={index}
                         className=""
@@ -52,38 +52,6 @@ export default () => {
                         disabled={false}
                     />
                 ))}
-            </div>
-            <div onKeyDown={handleKeyDown}>
-                <input
-                    className="empty"
-                    type="text"
-                    maxLength={1}
-                    disabled={true}
-                />
-                <input
-                    className="empty"
-                    type="text"
-                    maxLength={1}
-                    disabled={true}
-                />
-                <input
-                    className="empty"
-                    type="text"
-                    maxLength={1}
-                    disabled={true}
-                />
-                <input
-                    className="empty"
-                    type="text"
-                    maxLength={1}
-                    disabled={true}
-                />
-                <input
-                    className="empty"
-                    type="text"
-                    maxLength={1}
-                    disabled={true}
-                />
             </div>
         </main>
     );
