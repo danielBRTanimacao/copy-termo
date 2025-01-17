@@ -5,6 +5,13 @@ export default () => {
     const [randomTermo] = useState(
         Words[Math.floor(Math.random() * Words.length)].toUpperCase()
     );
+
+    const [term, setTerm] =
+        useState("Mostrar termo"); /* remover essa func depois */
+    const showTermo = () => {
+        setTerm(randomTermo);
+    }; /* remover depois */
+
     const [counter, setCounter] = useState(0);
     const [arrayBoolean, setArrayBoolean] = useState(
         Array(6)
@@ -96,7 +103,9 @@ export default () => {
                 </div>
             ))}
             <div>
-                <button type="button">Mostrar termo</button>
+                <button onClick={showTermo} type="button">
+                    {term}
+                </button>
             </div>
         </main>
     );

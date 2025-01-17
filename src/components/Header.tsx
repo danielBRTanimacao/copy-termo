@@ -110,7 +110,6 @@ export default () => {
                     tentativa, as peças mostram o quão perto você está da
                     solução.
                 </p>
-                <div className="exemple">exemple</div>
             </Modal>
             <Modal
                 isOpen={isOpen.status}
