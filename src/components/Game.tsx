@@ -8,7 +8,7 @@ export default () => {
     const [listObjRowTerm, setListObjRowTerm] = useState([
         {
             clean: true,
-            isWriting: false,
+            isWriting: true,
             isCorrectOrWrong: {
                 yes: true,
                 no: false,
@@ -73,24 +73,10 @@ export default () => {
         }
         const termo = values.join("").toUpperCase();
 
-        console.log(termo);
         if (getRandomTermo === termo) {
             setIsCorrect(true);
-            setListObjRowTerm(
-                Array(6)
-                    .fill(true)
-                    .map((_, index) => index !== -1)
-            );
         } else {
-            setCounter((prevCounter) => {
-                const newCounter = prevCounter + 1;
-                const newIsEmpty = Array(6)
-                    .fill(true)
-                    .map((value, index) => index !== newCounter - 1);
-                setListObjRowTerm(newIsEmpty);
-
-                return newCounter;
-            });
+            setIsCorrect(false);
         }
     };
 
@@ -109,24 +95,27 @@ export default () => {
             ) : (
                 <div className="win">{getRandomTermo}</div>
             )}
-            {Array.from({ length: 6 }).map((_, rowKeys) => (
+            {listObjRowTerm.map((_, rowKeys) => (
                 <div key={rowKeys} onKeyDown={handleKeyDown}>
                     {Array.from({ length: 5 }).map((_, colKeys) => (
                         <input
                             key={`disabled-${colKeys}`}
                             className={
-                                listObjRowTerm[rowKeys]
+                                !listObjRowTerm[rowKeys].isWriting
                                     ? `empty ${
                                           (listObjRowTerm[rowKeys], rowKeys)
                                       } ${
-                                          listObjRowTerm[rowKeys] ? "" : "wrong"
+                                          listObjRowTerm[rowKeys]
+                                              .isCorrectOrWrong
+                                              ? ""
+                                              : "wrong"
                                       }`
                                     : ""
                             }
                             type="text"
                             maxLength={1}
                             required
-                            disabled={listObjRowTerm[rowKeys]}
+                            disabled={!listObjRowTerm[rowKeys].isWriting}
                             ref={
                                 listObjRowTerm[rowKeys]
                                     ? null
