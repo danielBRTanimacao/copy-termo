@@ -3,39 +3,59 @@ import Words from "../assets/json/words.json";
 
 export default () => {
     const [randomTermo] = useState(
-        Words[Math.floor(Math.random() * Words.length)]
+        Words[Math.floor(Math.random() * Words.length)].toUpperCase()
     );
-    const [counter, setCounter] = useState(1);
+    const [counter, setCounter] = useState(0);
     const [arrayBoolean, setArrayBoolean] = useState(
         Array(6)
             .fill(true)
             .map((_, index) => index !== 0)
     );
     const [isCorrect, setIsCorrect] = useState(false);
-    const inputRefs = useRef<HTMLInputElement[]>([]);
+    const [rowsStatus, setRowsStatus] = useState<string[]>(Array(6).fill(""));
+    const inputRefs = useRef<HTMLInputElement[][]>(
+        Array.from({ length: 6 }, () => [])
+    );
 
     const handleCollectValues = () => {
-        const values = inputRefs.current.map((input) => input?.value || "");
-        const termo = values.join("").toUpperCase();
+        const currentInputs = inputRefs.current[counter];
+        const termo = currentInputs
+            .map((input) => input?.value || "")
+            .join("")
+            .toUpperCase();
+
         if (termo.length < 5) {
-            return null;
+            alert("Complete a palavra para enviar!");
+            return;
         }
 
-        if (randomTermo === termo) {
+        if (termo === randomTermo) {
             setIsCorrect(true);
-            setArrayBoolean(
-                Array(6)
-                    .fill(true)
-                    .map((_, index) => index !== -1)
+            setRowsStatus((prev) =>
+                prev.map((status, index) =>
+                    index === counter ? "correct" : status
+                )
             );
+            setArrayBoolean(Array(6).fill(true));
         } else {
+            setRowsStatus((prev) =>
+                prev.map((status, index) =>
+                    index === counter ? "wrong" : status
+                )
+            );
+
             setCounter((prevCounter) => {
                 const newCounter = prevCounter + 1;
-                const newIsEmpty = Array(6)
-                    .fill(true)
-                    .map((value, index) => index !== newCounter - 1);
-                setArrayBoolean(newIsEmpty);
-
+                if (newCounter >= 6) {
+                    alert(`Não foi dessa vez a resposta era: ${randomTermo}`);
+                    setArrayBoolean(Array(6).fill(true));
+                } else {
+                    setArrayBoolean(
+                        Array(6)
+                            .fill(true)
+                            .map((_, index) => index !== newCounter)
+                    );
+                }
                 return newCounter;
             });
         }
@@ -51,32 +71,33 @@ export default () => {
         <main>
             {isCorrect ? (
                 <div className="win">
-                    <p>Incrivel!</p>
+                    <p>Resposta correta! A palavra era: {randomTermo}</p>
                 </div>
-            ) : (
-                <div className="win">{randomTermo}</div>
-            )}
+            ) : null}
             {Array.from({ length: 6 }).map((_, rowKeys) => (
                 <div key={rowKeys} onKeyDown={handleKeyDown}>
                     {Array.from({ length: 5 }).map((_, colKeys) => (
                         <input
-                            key={`disabled-${colKeys}`}
-                            className={arrayBoolean[rowKeys] ? `empty` : ""}
+                            key={`row-${rowKeys}-col-${colKeys}`}
+                            className={`${rowsStatus[rowKeys]} ${
+                                arrayBoolean[rowKeys] ? "empty" : null
+                            }`}
                             type="text"
                             maxLength={1}
                             required
                             disabled={arrayBoolean[rowKeys]}
-                            ref={
-                                arrayBoolean[rowKeys]
-                                    ? null
-                                    : (el) =>
-                                          el &&
-                                          (inputRefs.current[colKeys] = el)
-                            }
+                            ref={(el) => {
+                                if (el) {
+                                    inputRefs.current[rowKeys][colKeys] = el;
+                                }
+                            }}
                         />
                     ))}
                 </div>
             ))}
+            <div>
+                <button type="button">Mostrar termo</button>
+            </div>
         </main>
     );
 };
