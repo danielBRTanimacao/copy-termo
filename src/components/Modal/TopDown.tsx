@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 interface TopDownProps {
     isOpen: boolean;
@@ -15,9 +16,9 @@ const TopDown: FC<TopDownProps> = ({ isOpen }) => {
                     <a href="/" className="active">
                         termo
                     </a>
-                    <a href="#">multijogador</a>
+                    <Link to="/">multijogador</Link>
                 </div>
-                <a href="#">i</a>
+                <Link to="/about">i</Link>
             </div>
         </aside>
     );

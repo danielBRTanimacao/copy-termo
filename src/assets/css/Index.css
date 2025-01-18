@@ -7,10 +7,12 @@
 :root {
     --inset: 0.15vh;
     --bg-color: #6e5c62;
+    --empty-color: #615458;
     --lightnes-color: #fafaff;
     --btn-color: #b7aeb4;
     --wrong: #312a2c;
     --correct: #3aa394;
+    --win: #009afe;
 }
 
 body {
@@ -258,8 +260,8 @@ main div input.empty {
 }
 
 main div input.empty {
-    background-color: #615458;
-    border: 0.1em solid #615458;
+    background-color: var(--empty-color);
+    border: 0.1em solid var(--empty-color);
 }
 
 main div input:focus {
@@ -285,7 +287,7 @@ main div input:focus {
 }
 
 .win p {
-    background-color: #009afe;
+    background-color: var(--win);
     padding: 5px;
     border-radius: 5px;
     font-size: small;

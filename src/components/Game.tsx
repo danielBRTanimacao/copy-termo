@@ -6,12 +6,6 @@ export default () => {
         Words[Math.floor(Math.random() * Words.length)].toUpperCase()
     );
 
-    const [term, setTerm] =
-        useState("Mostrar termo"); /* remover essa func depois */
-    const showTermo = () => {
-        setTerm(randomTermo);
-    }; /* remover depois */
-
     const [counter, setCounter] = useState(0);
     const [arrayBoolean, setArrayBoolean] = useState(
         Array(6)
@@ -39,6 +33,7 @@ export default () => {
             alert("Não pode conter números!");
             return;
         }
+
         if (termo === randomTermo) {
             setIsCorrect(true);
             setRowsStatus((prev) =>
@@ -105,11 +100,6 @@ export default () => {
                     ))}
                 </div>
             ))}
-            <div>
-                <button onClick={showTermo} type="button">
-                    {term}
-                </button>
-            </div>
         </main>
     );
 };
