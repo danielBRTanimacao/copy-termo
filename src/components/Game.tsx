@@ -35,7 +35,10 @@ export default () => {
             alert("Complete a palavra para enviar!");
             return;
         }
-
+        if (/\d/.test(termo)) {
+            alert("Não pode conter números!");
+            return;
+        }
         if (termo === randomTermo) {
             setIsCorrect(true);
             setRowsStatus((prev) =>

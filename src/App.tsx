@@ -1,13 +1,13 @@
 import Header from "./components/Header";
 import Game from "./components/Game";
-// import Keyboard from "./components/Keyboard";
+import Keyboard from "./components/Keyboard";
 
 export default () => {
     return (
         <>
             <Header />
             <Game />
-            {/* <Keyboard /> */}
+            <Keyboard />
         </>
     );
 };
