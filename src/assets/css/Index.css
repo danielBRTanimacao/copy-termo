@@ -10,6 +10,7 @@
     --lightnes-color: #fafaff;
     --btn-color: #b7aeb4;
     --wrong: #312a2c;
+    --place: #d3ad69;
     --correct: #3aa394;
     --win: #009afe;
 }
@@ -336,8 +337,8 @@ main div input:focus {
     background-color: #191516 !important;
 }
 .letter.place {
-    border: 0.06em solid #d3ad69;
-    background-color: #d3ad69 !important;
+    border: 0.06em solid var(--place);
+    background-color: var(--place) !important;
 }
 
 .modal-content p {
