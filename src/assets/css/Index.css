@@ -3,7 +3,6 @@
 /*
     DEFAULT
 */
-
 :root {
     --inset: 0.15vh;
     --bg-color: #6e5c62;
@@ -13,6 +12,22 @@
     --wrong: #312a2c;
     --correct: #3aa394;
     --win: #009afe;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--empty-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--wrong);
 }
 
 body {
@@ -335,6 +350,14 @@ main div input:focus {
 
 .about p a {
     color: #ebe;
+}
+
+footer {
+    color: #b4abb0;
+    font-size: 1rem;
+    font-weight: 350;
+    margin: 3em;
+    text-align: right;
 }
 
 @media (max-width: 1399.98px) {
