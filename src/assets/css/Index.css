@@ -238,9 +238,9 @@ Modal
     border-radius: 8px;
     position: relative;
     width: 90%;
-    max-width: 500px;
+    max-width: 750px;
     color: #bbb;
-    font-size: 1em;
+    font-size: 1.3em;
     font-weight: 300;
     line-height: 1.35em;
 }
@@ -258,7 +258,8 @@ main div {
 }
 
 main div input,
-main div input.empty {
+main div input.empty,
+.letter {
     font-size: 2em;
     height: 62px;
     width: 62px;
@@ -306,6 +307,51 @@ main div input:focus {
     padding: 5px;
     border-radius: 5px;
     font-size: small;
+}
+
+/*
+    Modal HELP
+*/
+
+.exemple,
+.letter {
+    display: flex;
+    align-items: center;
+}
+
+.letter {
+    height: 52px;
+    width: 52px;
+    justify-content: center;
+    font-size: 1.5em;
+    margin: 2px;
+    font-weight: 600;
+    color: #fafaff;
+    background-color: transparent;
+    border: 0.06em solid #4c4347;
+    text-transform: uppercase;
+}
+
+.letter.wrong {
+    background-color: #191516 !important;
+}
+.letter.place {
+    border: 0.06em solid #d3ad69;
+    background-color: #d3ad69 !important;
+}
+
+.modal-content p {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+p span.letter.correct,
+p span.letter.wrong,
+p span.letter.place {
+    font-size: 1em;
+    height: 32px;
+    width: 32px;
 }
 
 /*
