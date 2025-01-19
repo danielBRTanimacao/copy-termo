@@ -287,6 +287,11 @@ main div input:focus {
     border-bottom: 0.4em solid #4c4347;
 }
 
+.place {
+    background-color: var(--place) !important;
+    border: 0.1em solid var(--place) !important;
+}
+
 .wrong {
     background-color: var(--wrong) !important;
     border: 0.1em solid var(--wrong) !important;
@@ -338,7 +343,6 @@ main div input:focus {
 }
 .letter.place {
     border: 0.06em solid var(--place);
-    background-color: var(--place) !important;
 }
 
 .modal-content p {

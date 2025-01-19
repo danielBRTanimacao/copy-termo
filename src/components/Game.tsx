@@ -13,7 +13,9 @@ export default () => {
             .map((_, index) => index !== 0)
     );
     const [isCorrect, setIsCorrect] = useState(false);
-    const [rowsStatus, setRowsStatus] = useState<string[]>(Array(6).fill(""));
+    const [rowsStatus, setRowsStatus] = useState<string[][]>(
+        Array.from({ length: 6 }, () => Array(5).fill(""))
+    );
     const inputRefs = useRef<HTMLInputElement[][]>(
         Array.from({ length: 6 }, () => [])
     );
@@ -34,21 +36,43 @@ export default () => {
             return;
         }
 
+        const newRowStatus = [...rowsStatus];
+        const letterCounts: Record<string, number> = {};
+
+        // Count letters in the randomTermo
+        for (const char of randomTermo) {
+            letterCounts[char] = (letterCounts[char] || 0) + 1;
+        }
+
+        // Determine letter status
+        const termoArray = termo.split("");
+        const randomArray = randomTermo.split("");
+
+        termoArray.forEach((letter, index) => {
+            if (randomArray[index] === letter) {
+                newRowStatus[counter][index] = "correct";
+                letterCounts[letter] -= 1;
+            }
+        });
+
+        termoArray.forEach((letter, index) => {
+            if (
+                newRowStatus[counter][index] !== "correct" &&
+                letterCounts[letter] > 0
+            ) {
+                newRowStatus[counter][index] = "place";
+                letterCounts[letter] -= 1;
+            } else if (newRowStatus[counter][index] === "") {
+                newRowStatus[counter][index] = "wrong";
+            }
+        });
+
+        setRowsStatus(newRowStatus);
+
         if (termo === randomTermo) {
             setIsCorrect(true);
-            setRowsStatus((prev) =>
-                prev.map((status, index) =>
-                    index === counter ? "correct" : status
-                )
-            );
             setArrayBoolean(Array(6).fill(true));
         } else {
-            setRowsStatus((prev) =>
-                prev.map((status, index) =>
-                    index === counter ? "wrong" : status
-                )
-            );
-
             setCounter((prevCounter) => {
                 const newCounter = prevCounter + 1;
                 if (newCounter >= 6) {
@@ -84,7 +108,7 @@ export default () => {
                     {Array.from({ length: 5 }).map((_, colKeys) => (
                         <input
                             key={`row-${rowKeys}-col-${colKeys}`}
-                            className={`${rowsStatus[rowKeys]} ${
+                            className={`${rowsStatus[rowKeys][colKeys]} ${
                                 arrayBoolean[rowKeys] ? "empty" : null
                             }`}
                             type="text"
