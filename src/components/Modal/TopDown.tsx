@@ -16,7 +16,7 @@ const TopDown: FC<TopDownProps> = ({ isOpen }) => {
                     <a href="/" className="active">
                         termo
                     </a>
-                    <Link to="/">multijogador</Link>
+                    <Link to="/mul">multijogador</Link>
                 </div>
                 <Link to="/about">i</Link>
             </div>

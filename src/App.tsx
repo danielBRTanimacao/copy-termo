@@ -4,7 +4,7 @@ import Game from "./components/Game";
 export default () => {
     return (
         <>
-            <Header />
+            <Header title="TERMO" />
             <Game />
         </>
     );

@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "./Modal/Modal";
 import TopDown from "./Modal/TopDown";
 
-export default () => {
+export default ({ title }: { title: string }) => {
     const [isOpen, setOpen] = useState({
         topDown: false,
         modal: false,
@@ -59,7 +59,7 @@ export default () => {
                             <div>?</div>
                         </button>
                     </div>
-                    <h1>TERMO</h1>
+                    <h1>{title}</h1>
                     <div>
                         <button
                             className="btn"
