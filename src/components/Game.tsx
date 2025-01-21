@@ -39,12 +39,10 @@ export default () => {
         const newRowStatus = [...rowsStatus];
         const letterCounts: Record<string, number> = {};
 
-        // Count letters in the randomTermo
         for (const char of randomTermo) {
             letterCounts[char] = (letterCounts[char] || 0) + 1;
         }
 
-        // Determine letter status
         const termoArray = termo.split("");
         const randomArray = randomTermo.split("");
 
@@ -90,9 +88,30 @@ export default () => {
         }
     };
 
-    const handleKeyDown = (event: React.KeyboardEvent) => {
-        if (event.key === "Enter") {
+    const handleKeyDown = (
+        event: React.KeyboardEvent<HTMLInputElement>,
+        rowIndex: number,
+        colIndex: number
+    ) => {
+        if (event.key === "Backspace" && !event.currentTarget.value) {
+            if (colIndex > 0) {
+                const prevInput = inputRefs.current[rowIndex][colIndex - 1];
+                prevInput?.focus();
+            }
+        } else if (event.key === "Enter") {
             handleCollectValues();
+        }
+    };
+
+    const handleInputChange = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        rowIndex: number,
+        colIndex: number
+    ) => {
+        const value = e.target.value;
+        if (value && colIndex < 4) {
+            const nextInput = inputRefs.current[rowIndex][colIndex + 1];
+            nextInput?.focus();
         }
     };
 
@@ -104,7 +123,7 @@ export default () => {
                 </div>
             ) : null}
             {Array.from({ length: 6 }).map((_, rowKeys) => (
-                <div key={rowKeys} onKeyDown={handleKeyDown}>
+                <div key={rowKeys}>
                     {Array.from({ length: 5 }).map((_, colKeys) => (
                         <input
                             key={`row-${rowKeys}-col-${colKeys}`}
@@ -115,6 +134,12 @@ export default () => {
                             maxLength={1}
                             required
                             disabled={arrayBoolean[rowKeys]}
+                            onKeyDown={(e) =>
+                                handleKeyDown(e, rowKeys, colKeys)
+                            }
+                            onChange={(e) =>
+                                handleInputChange(e, rowKeys, colKeys)
+                            }
                             ref={(el) => {
                                 if (el) {
                                     inputRefs.current[rowKeys][colKeys] = el;
