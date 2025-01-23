@@ -411,6 +411,35 @@ footer {
     text-align: right;
 }
 
+/*
+    Multiplayer
+*/
+
+main div label {
+    font-size: xx-large;
+}
+
+.createBtn {
+    width: 15vh;
+}
+
+main .multiplayerDiv,
+main .multiObby {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h4 {
+    font-weight: 300;
+}
+
+main .multiObby input,
+main div #playerInput {
+    width: 40%;
+    border-radius: 5px;
+}
+
 @media (max-width: 1399.98px) {
     .about {
         margin: 0 20em;
