@@ -91,7 +91,7 @@ const MultiplayerComponent: React.FC = () => {
                         <h1>Olá, {savedPlayerName}</h1>
                         <aside className="divisionlobby">
                             <div>
-                                <h2>Entrar na sala</h2>
+                                <h2>ENTRAR NA SALA</h2>
                                 <input
                                     type="text"
                                     name="enterRoom"
@@ -105,7 +105,7 @@ const MultiplayerComponent: React.FC = () => {
                                         alignItems: "center"
                                     }}
                                 >
-                                    Sua sala {roomId}{" "}
+                                    SUA SALA {roomId}{" "}
                                     <button>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

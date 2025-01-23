@@ -420,7 +420,8 @@ main div label {
 }
 
 h4 {
-    font-weight: 300;
+    font-weight: 400;
+    color: var(--wrong);
 }
 
 .createBtn {
