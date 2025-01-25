@@ -13,51 +13,57 @@ export default () => {
         setSavedPlayerName(playerNameInput);
     };
 
-    // const generatePlayerId = (isRoom: boolean) => {
-    //     const letters = [
-    //         "a",
-    //         "b",
-    //         "c",
-    //         "d",
-    //         "e",
-    //         "f",
-    //         "g",
-    //         "h",
-    //         "j",
-    //         "k",
-    //         "l",
-    //         "m",
-    //         "n",
-    //         "o",
-    //         "p",
-    //         "q",
-    //         "r",
-    //         "s",
-    //         "t",
-    //         "u",
-    //         "v",
-    //         "w",
-    //         "x",
-    //         "y",
-    //         "z"
-    //     ];
-    //     if (isRoom) {
-    //         const randomLetter =
-    //             letters[Math.floor(Math.random() * letters.length)];
-    //         const randomLetter2 =
-    //             letters[Math.floor(Math.random() * letters.length)];
-    //         const randomNumber = Math.floor(10000 + Math.random() * 90000);
-    //         return `
-    //             #${randomLetter}${randomLetter2}${randomNumber}`;
-    //     }
-    //     const randomLetter =
-    //         letters[Math.floor(Math.random() * letters.length)];
-    //     const randomNumber = Math.floor(10000 + Math.random() * 90000);
-    //     return `#${randomLetter}${randomNumber}`;
-    // };
+    const generatePlayerId = (isRoom: boolean) => {
+        const letters = [
+            "a",
+            "b",
+            "c",
+            "d",
+            "e",
+            "f",
+            "g",
+            "h",
+            "j",
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t",
+            "u",
+            "v",
+            "w",
+            "x",
+            "y",
+            "z"
+        ];
+        if (isRoom) {
+            const randomLetter =
+                letters[Math.floor(Math.random() * letters.length)];
+            const randomLetter2 =
+                letters[Math.floor(Math.random() * letters.length)];
+            const randomNumber = Math.floor(10000 + Math.random() * 90000);
+            return `
+                #${randomLetter}${randomLetter2}${randomNumber}`;
+        }
+        const randomLetter =
+            letters[Math.floor(Math.random() * letters.length)];
+        const randomNumber = Math.floor(10000 + Math.random() * 90000);
+        return `#${randomLetter}${randomNumber}`;
+    };
 
     // const playerId = generatePlayerId(false);
-    // const roomId = generatePlayerId(true);
+
+    const [roomId, setroomId] = useState("");
+    const createRoom = () => {
+        setroomId(generatePlayerId(true));
+        console.log(roomId);
+        return "Aoba";
+    };
 
     return (
         <>
@@ -124,7 +130,8 @@ export default () => {
                                 <input
                                     className="initBtn"
                                     type="button"
-                                    value="Iniciar"
+                                    value="Criar sala"
+                                    onClick={createRoom}
                                 />
                             </div>
                         </aside>
