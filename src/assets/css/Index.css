@@ -428,17 +428,8 @@ h4 {
     width: 15vh;
 }
 
+main .multiplayerDiv,
 main .multiObby {
-    display: block;
-    text-align: center;
-}
-
-main .multiObby h4 {
-    padding: 0 10px;
-    text-align: start;
-}
-
-main .multiplayerDiv {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -446,12 +437,13 @@ main .multiplayerDiv {
 
 main .multiObby input,
 main div #playerInput {
-    width: 40%;
+    width: 30%;
     border-radius: 5px;
 }
 
 .divisionlobby {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
 }
 

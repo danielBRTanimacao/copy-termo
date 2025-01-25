@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 
-const MultiplayerComponent: React.FC = () => {
+export default () => {
     const [playerNameInput, setPlayerNameInput] = useState("");
     const [savedPlayerName, setSavedPlayerName] = useState("");
 
@@ -56,8 +56,8 @@ const MultiplayerComponent: React.FC = () => {
         return `#${randomLetter}${randomNumber}`;
     };
 
-    const playerId = generatePlayerId(false);
-    const roomId = generatePlayerId(true);
+    // const playerId = generatePlayerId(false);
+    // const roomId = generatePlayerId(true);
 
     return (
         <>
@@ -87,19 +87,17 @@ const MultiplayerComponent: React.FC = () => {
                     </div>
                 ) : (
                     <div className="multiObby">
-                        <h4>{playerId}</h4>
                         <h1>Olá, {savedPlayerName}</h1>
                         <aside className="divisionlobby">
                             <div>
-                                <h2>ENTRAR NA SALA</h2>
                                 <input
-                                    type="text"
-                                    name="enterRoom"
-                                    id="enterRoomId"
+                                    className="initBtn"
+                                    type="button"
+                                    value="ENTRAR"
                                 />
                             </div>
                             <div>
-                                <h2
+                                {/* <h2
                                     style={{
                                         display: "flex",
                                         alignItems: "center"
@@ -121,7 +119,7 @@ const MultiplayerComponent: React.FC = () => {
                                             />
                                         </svg>
                                     </button>
-                                </h2>
+                                </h2> */}
 
                                 <input
                                     className="initBtn"
@@ -136,5 +134,3 @@ const MultiplayerComponent: React.FC = () => {
         </>
     );
 };
-
-export default MultiplayerComponent;
