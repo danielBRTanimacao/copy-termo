@@ -153,6 +153,17 @@ export default () => {
                     </button>
                 </h2>
             </Modal>
+            <Modal
+                isOpen={isOpen.createRoom}
+                onClose={() =>
+                    setOpen({
+                        enterRoom: isOpen.enterRoom,
+                        createRoom: false
+                    })
+                }
+            >
+                <h2>Teste</h2>
+            </Modal>
         </>
     );
 };
