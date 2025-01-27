@@ -452,16 +452,6 @@ main div #playerInput {
     flex-direction: column;
 }
 
-.initBtn {
-    width: 30vh !important;
-}
-
-.initBtn:hover {
-    caret-color: transparent;
-    outline: none;
-    border-bottom: 0.4em solid #4c4347;
-}
-
 @media (max-width: 1399.98px) {
     .about {
         margin: 0 20em;

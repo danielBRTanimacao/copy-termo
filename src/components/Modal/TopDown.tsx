@@ -1,13 +1,6 @@
-import { FC } from "react";
 import { Link } from "react-router-dom";
 
-interface TopDownProps {
-    isOpen: boolean;
-    tm: boolean;
-    onClose: () => void;
-}
-
-const TopDown: FC<TopDownProps> = ({ isOpen, tm }) => {
+export default ({ isOpen, tm }: { isOpen: boolean; tm: boolean }) => {
     if (!isOpen) return null;
 
     return (
@@ -26,5 +19,3 @@ const TopDown: FC<TopDownProps> = ({ isOpen, tm }) => {
         </aside>
     );
 };
-
-export default TopDown;
