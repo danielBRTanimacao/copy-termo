@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({
+export default function Modal({
     isOpen,
     onClose,
     children
@@ -8,7 +8,7 @@ export default ({
     isOpen: boolean;
     onClose: () => void;
     children: React.ReactNode;
-}) => {
+}) {
     if (!isOpen) return null;
 
     return (
@@ -18,4 +18,4 @@ export default ({
             </div>
         </div>
     );
-};
+}
