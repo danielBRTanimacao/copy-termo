@@ -18,7 +18,7 @@ export default () => {
         setSavedPlayerName(playerNameInput);
     };
 
-    const generatePlayerId = (isRoom: boolean) => {
+    const idGenerator = () => {
         const letters = [
             "a",
             "b",
@@ -46,34 +46,45 @@ export default () => {
             "y",
             "z"
         ];
-        if (isRoom) {
-            const randomLetter =
-                letters[Math.floor(Math.random() * letters.length)];
-            const randomLetter2 =
-                letters[Math.floor(Math.random() * letters.length)];
-            const randomNumber = Math.floor(10000 + Math.random() * 90000);
-            return `
-                #${randomLetter}${randomLetter2}${randomNumber}`;
-        }
+
         const randomLetter =
             letters[Math.floor(Math.random() * letters.length)];
+        const randomLetter2 =
+            letters[Math.floor(Math.random() * letters.length)];
         const randomNumber = Math.floor(10000 + Math.random() * 90000);
-        return `#${randomLetter}${randomNumber}`;
+        return `
+                #${randomLetter}${randomLetter2}${randomNumber}`;
     };
 
-    // const playerId = generatePlayerId(false);
-
     const [roomId, setroomId] = useState("");
-    const createRoom = () => {
-        setroomId(generatePlayerId(true));
+    const enterRoomModal = () => {
+        setOpen((prevState) => ({
+            ...prevState,
+            enterRoom: true
+        }));
+    };
+    const createRoomModal = () => {
+        setOpen((prevState) => ({
+            ...prevState,
+            createRoom: true
+        }));
+        setroomId(idGenerator());
+    };
 
-        console.log(roomId);
-        return "Aoba";
+    const copyToClipboard = (text: string) => {
+        navigator.clipboard
+            .writeText(text)
+            .then(() => {
+                setTimeout(() => 2000);
+            })
+            .catch((err) =>
+                console.error("Não foi possivel copiar o textos: ", err)
+            );
     };
 
     return (
         <>
-            <Header title="MULTIPLAYER" modal="infos" tm={true} />
+            <Header title="MULTIPLAYER" modal={`infos`} tm={true} />
             <main>
                 {!savedPlayerName ? (
                     <div className="multiplayerDiv">
@@ -102,10 +113,12 @@ export default () => {
                         <h1>Olá, {savedPlayerName}</h1>
                         <aside className="divisionlobby">
                             <div>
-                                <button type="button">ENTRAR NA SALA</button>
+                                <button type="button" onClick={enterRoomModal}>
+                                    ENTRAR NA SALA
+                                </button>
                             </div>
                             <div>
-                                <button type="button" onClick={createRoom}>
+                                <button type="button" onClick={createRoomModal}>
                                     CRIAR SALA
                                 </button>
                             </div>
@@ -114,11 +127,11 @@ export default () => {
                 )}
             </main>
             <Modal
-                isOpen={isOpen.enterRoom}
+                isOpen={isOpen.createRoom}
                 onClose={() =>
                     setOpen({
-                        enterRoom: false,
-                        createRoom: isOpen.createRoom
+                        enterRoom: isOpen.enterRoom,
+                        createRoom: false
                     })
                 }
             >
@@ -129,7 +142,11 @@ export default () => {
                     }}
                 >
                     SUA SALA {roomId}{" "}
-                    <button>
+                    <button
+                        onClick={() => {
+                            copyToClipboard(roomId);
+                        }}
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -147,11 +164,11 @@ export default () => {
                 </h2>
             </Modal>
             <Modal
-                isOpen={isOpen.createRoom}
+                isOpen={isOpen.enterRoom}
                 onClose={() =>
                     setOpen({
-                        enterRoom: isOpen.enterRoom,
-                        createRoom: false
+                        enterRoom: false,
+                        createRoom: isOpen.createRoom
                     })
                 }
             >
