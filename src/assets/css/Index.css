@@ -452,6 +452,10 @@ main div #playerInput {
     flex-direction: column;
 }
 
+.divisionlobby div button {
+    width: 100% !important;
+}
+
 @media (max-width: 1399.98px) {
     .about {
         margin: 0 20em;

@@ -102,7 +102,7 @@ export default () => {
                         <h1>Olá, {savedPlayerName}</h1>
                         <aside className="divisionlobby">
                             <div>
-                                <button type="button">ENTRAR</button>
+                                <button type="button">ENTRAR NA SALA</button>
                             </div>
                             <div>
                                 <button type="button" onClick={createRoom}>
