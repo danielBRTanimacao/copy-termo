@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Modal from "./Modal/Modal";
-import Header from "./Header";
+import Modal from "./components/Modal/Modal";
+import Header from "./components/Header";
 
 export default () => {
     const [isOpen, setOpen] = useState({
@@ -172,7 +172,15 @@ export default () => {
                     })
                 }
             >
-                <h2>Teste</h2>
+                <h2>Digite o id da sala</h2>
+                <form action="#">
+                    <input
+                        type="text"
+                        name="enterRoom"
+                        id="idEnterRoom"
+                        maxLength={8}
+                    />
+                </form>
             </Modal>
         </>
     );
