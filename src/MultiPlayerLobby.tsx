@@ -71,15 +71,13 @@ export default () => {
         setroomId(idGenerator());
     };
 
-    const copyToClipboard = (text: string) => {
+    const copyToClipboard = () => {
         navigator.clipboard
-            .writeText(text)
+            .writeText(roomId)
             .then(() => {
                 setTimeout(() => 2000);
             })
-            .catch((err) =>
-                console.error("Não foi possivel copiar o textos: ", err)
-            );
+            .catch((err) => alert(`Não foi possivel copiar o textos: ${err}`));
     };
 
     return (
@@ -142,11 +140,7 @@ export default () => {
                     }}
                 >
                     SUA SALA {roomId}{" "}
-                    <button
-                        onClick={() => {
-                            copyToClipboard(roomId);
-                        }}
-                    >
+                    <button onClick={copyToClipboard}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -175,6 +169,7 @@ export default () => {
                 <h2>Digite o id da sala</h2>
                 <form action="#">
                     <input
+                        style={{ width: "50%", borderRadius: "5px" }}
                         type="text"
                         name="enterRoom"
                         id="idEnterRoom"

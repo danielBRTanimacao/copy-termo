@@ -260,7 +260,8 @@ main div {
 
 main div input,
 main div input.empty,
-.letter {
+.letter,
+form input {
     font-size: 2em;
     height: 62px;
     width: 62px;
